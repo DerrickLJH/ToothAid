@@ -1,0 +1,42 @@
+.loc {
+    height: 200px;
+}
+
+.cardLoc {
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+}
+
+.homebtns {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 20px;
+}
+.headerCards {
+    border-radius: 0 !important;
+}
+.cardSchedule {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+}
+nav {
+    width: 100%;
+}
+
+body{ 
+    background-color: #1B1B1B;
+    //background-color: #E6F6FF;
+}
+.button5 {
+    border-radius: 50%;
+    position: absolute;
+    font-size: 25px;
+    right: 15px;
+    bottom: 15px;
+}
