@@ -12,6 +12,26 @@
         <script src="js/jquery.validate.min.js" type="text/javascript"></script>
         <script src="js/additional-methods.min.js" type="text/javascript"></script>    
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#config-web-app -->
+
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyB6e0LFKNwLXDeMiZPbl6bdpf8ab5BMNMQ",
+                authDomain: "toothaid-1558875904634.firebaseapp.com",
+                databaseURL: "https://toothaid-1558875904634.firebaseio.com",
+                projectId: "toothaid-1558875904634",
+                storageBucket: "toothaid-1558875904634.appspot.com",
+                messagingSenderId: "289974946400",
+                appId: "1:289974946400:web:65ecb9d90373f3f3"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+        </script>
 
         <style></style>
     </head>

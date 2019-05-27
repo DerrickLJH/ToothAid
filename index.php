@@ -17,6 +17,26 @@ and open the template in the editor.
         <script src="js/jquery.validate.min.js" type="text/javascript"></script>
         <script src="js/additional-methods.min.js" type="text/javascript"></script>    
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#config-web-app -->
+
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyB6e0LFKNwLXDeMiZPbl6bdpf8ab5BMNMQ",
+                authDomain: "toothaid-1558875904634.firebaseapp.com",
+                databaseURL: "https://toothaid-1558875904634.firebaseio.com",
+                projectId: "toothaid-1558875904634",
+                storageBucket: "toothaid-1558875904634.appspot.com",
+                messagingSenderId: "289974946400",
+                appId: "1:289974946400:web:65ecb9d90373f3f3"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+        </script>
     </head>
 
     <body>
@@ -43,16 +63,18 @@ and open the template in the editor.
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        
+
         <div class="container-fluid">
-            <div class="alert alert-danger" role="alert" id="alertBox" style="margin-top: 20px; display: none;">You need to sign up before scheduling an appointment.</div>
-            <div class="row">
-                <a href="#" class="homebtns btn btn-light font-weight-bold col-md-12 disabled"><i class="fas fa-calendar-alt"></i> Schedule an Appointment</a>
-                <a href="#" class="homebtns btn btn-light font-weight-bold col-md-12"><i class="fas fa-tooth"></i> Conditions and Treatment</a>
-                <a href="#" class="homebtns btn btn-light font-weight-bold col-md-12"><i class="fas fa-search-location"></i> Locate a Dental Clinic</a>
+            <div class="row" style="margin-top: 20px; margin-bottom: 80px;">
+                <a href="#" class="homebtns btn btn-primary font-weight-bold col-md-12"><i class="fas fa-tooth"></i> View Provided Services</a>
+                <a href="locateus.php" class="homebtns btn btn-primary font-weight-bold col-md-12"><i class="fas fa-search-location"></i> Locate a Dental Clinic</a>
+                <a href="booking.php" class="homebtns btn btn-primary font-weight-bold col-md-12 disabled"><i class="fas fa-calendar-alt"></i> Schedule an Appointment</a>
+                <a href="#" class="homebtns btn btn-primary font-weight-bold col-md-12 disabled"><i class="fas fa-tasks"></i> Manage Appointments</a>
             </div>
         </div>
-        <a href="#" class="button5 btn btn-secondary"> <i class="fas fa-comments"></i></a>
+        <div class="chatbot">
+            <a href="chatbot.php" class="chatbot btn btn-danger">Chatbot <i class="fas fa-comments"></i></a>
+        </div>
 
 
 

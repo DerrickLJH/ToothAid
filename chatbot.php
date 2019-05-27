@@ -18,15 +18,15 @@ and open the template in the editor.
         <script src="js/additional-methods.min.js" type="text/javascript"></script>    
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <style>
-            iframe {
-                margin-top: 0;
-                height: 500px;
-                width: 100%;
+            body {
+                background-color: #1B1B1B;
             }
         </style>
     </head>
     <body>
         <?php include("panel.php"); ?>
-        <iframe src="https://bot.dialogflow.com/78cf6fe5-b7e9-473d-aceb-ccc67172914c"></iframe>
+        <div>
+            <iframe allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/8aff1d48-7cfb-4353-bc66-60c19fe172be"></iframe>
+        </div>
     </body>
 </html>
