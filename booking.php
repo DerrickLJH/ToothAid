@@ -4,22 +4,11 @@
         <meta charset="UTF-8">
         <title>Tooth Aid</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>    
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-        <link href="css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>  
-        <script src="js/jquery.validate.min.js" type="text/javascript"></script>
-        <script src="js/additional-methods.min.js" type="text/javascript"></script>    
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-             https://firebase.google.com/docs/web/setup#config-web-app -->
-
+        <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
         <script>
-            // Your web app's Firebase configuration
             var firebaseConfig = {
                 apiKey: "AIzaSyB6e0LFKNwLXDeMiZPbl6bdpf8ab5BMNMQ",
                 authDomain: "toothaid-1558875904634.firebaseapp.com",
@@ -32,98 +21,92 @@
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
         </script>
-
-        <style></style>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/moment.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <?php include("panel.php"); ?>
         <div class="card cardSchedule headerCards">
             <div class="card-header"><h4>Schedule an Appointment</div>
             <div class="card-body">
-                <div class="alert alert-danger" role="alert" id="alertBox">                
-                </div>
-                <form id="form" method="post" action="#" class="form-horizontal">
+                <form id="form" method="post" action="index.php" class="form-horizontal">
                     <div class="form-group">
-                        <label for="idName">Name<span style="color:red">*</span>:</label>         
+                        <label for="idName">Name: </label>
                         <input type="text" name="name" id="idName" class="form-control"/>
                     </div>
+
                     <div class="form-group">
-                        <label for="idAddress">Address:</label>
-                        <input type="text" name="address" id="idAddress" class="form-control"/>
+                        <label for="idEmail">Email: </label>
+                        <input type="text" name="email" id="idEmail" class="form-control" placeholder="e.g. abc123@zxc.com"/>
                     </div>
                     <div class="form-group">
-                        <label for="idPostal">Postal Code:</label>
-                        <input type="text" name="postalcode"
-                               placeholder="enter a 6-digit code" id="idPostal" class="form-control"/>
+                        <label for="idPostal">Mobile:</label>
+                        <input type="text" name="mobile"
+                               placeholder="e.g. 91234567" id="idMobile" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label for="selCountry">Country<span style="color:red">*</span>:</label>
-                        <select id="selCountry" name="country" class="form-control">
+                        <label for="datetimepicker">Date & Time:</label>
+                        <input type="text" class="form-control" name="date_time" id="datetimepicker1">
+                    </div>
+                    <div class="form-group">
+                        <label for="selService">Service:</label>
+                        <select id="selService" name="service" class="form-control">
                             <option value="" selected>Please select...</option>
-                            <option value="AA">AA</option>
-                            <option value="BB">BB</option>
-                            <option value="CC">CC</option>
+                            <option value="Braces">Braces</option>
+                            <option value="Dentures">Dentures</option>
+                            <option value="GDT">General Dental Treatment</option>
+                            <option value="Gum">Gum Disease</option>
+                            <option value="Implant">Implant</option>
+                            <option value="Nerve">Nerve Treatment</option>
+                            <option value="WisTooth">Wisdom Tooth</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selClinic">Preferred Clinic:</label>
+                        <select id="selClinic" name="clinic" class="form-control">
+                            <option value="" selected>Please select...</option>
+                            <option value="yewtee">Yew Tee Square Dental Clinic</option>
+                            <option value="clementi">Clementi Dental Clinic</option>
+                            <option value="amk">Ang Mo Kio Dental Clinic</option>
+                            <option value="beachrd">Beach Road Dental Clinic</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label>Gender<span style="color:red">*</span>:</label>
-                        <div class="form-check-inline">
-                            <label class="form-check-label" for="radio1">
-                                <input type="radio" class="form-check-input" id="radio1" name="gender" value="m">Male
-                            </label>
-                        </div>
-                        <div class="form-check-inline">
-                            <label class="form-check-label" for="radio2">
-                                <input type="radio" class="form-check-input" id="radio2" name="gender" value="f">Female
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Preferences<span style="color:red">*</span>:</label>
-                        <div class="form-check-inline">
-                            <label class="form-check-label" for="check1">
-                                <input type="checkbox" id="check1" name="color[]" value="r" class="chkboxlist form-check-input">Red
-                            </label>
-                        </div>
-                        <div class="form-check-inline">
-                            <label class="form-check-label" for="check2">
-                                <input type="checkbox" id="check2" name="color[]" value="g" class="chkboxlist form-check-input">Green
-                            </label>
-                        </div>
-                        <div class="form-check-inline">
-                            <label class="form-check-label" for="check3">
-                                <input type="checkbox" id="check3" name="color[]" value="b" class="chkboxlist form-check-input">Blue
-                            </label>
-                        </div>            
-                    </div>
-                    <div class="form-group">
-                        <label for="idName">Phone<span style="color:red">*</span>:</label>
-                        <input type="text" name="phone" id="idPhone" class="form-control"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="idEmail">Email<span style="color:red">*</span>:</label>
-                        <input type="text" name="email" id="idEmail" class="form-control"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="idPwd">Password<span style="color:red">*</span>:</label>             
-                        <input type="password" name="pwd" id="idPwd" class="form-control" placeholder="6-8 characters"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="idVerifyPwd">Verify Password<span style="color:red">*</span>:</label>
-                        <input type="password" name="verifypwd" id="idVerifyPwd" class="form-control"/>
-                    </div>
-
-                    <input class="btn btn-block btn-primary" type="submit" value="Submit"/>
-                    <input class="btn btn-block btn-default" type="reset" id="btnReset" value="Reset"/>
+                    <input class="btn btn-block btn-primary" id="submit" type="submit" value="Submit"/>
                 </form>
             </div>
-
-
-
-
         </div>
+        <script>
+            var database = firebase.database();
+            $("#submit").on("click", function () {
+                var name = $("#idName").val();
+                var email = $("#idEmail").val();
+                var mobile = $("#idMobile").val();
+                var datetime = $("#datetimepicker1").val();
+                var selectedService = $("#selService :selected").text();
+                var selectedClinic = $("#selClinic :selected").text();
+                var data = {
+                    name: name,
+                    email: email,
+                    mobile: mobile,
+                    datetime: datetime,
+                    service: selectedService,
+                    clinic: selectedClinic
+                };
+                database.ref('data/appointment').push(data);
+            });
+
+
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
     </body>
 </html>

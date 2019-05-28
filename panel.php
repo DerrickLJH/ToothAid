@@ -15,23 +15,23 @@
                 <a class="nav-link" href="index.php">Home</a>
             </li>
             <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle disabled" href="#" id="navbardrop" data-toggle="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     Appointment
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item active" href="booking.php">Schedule an Appointment</a>
-                    <a class="dropdown-item" href="#">Manage Appointments</a>                           
+                    <a class="dropdown-item" href="booking.php">Schedule an Appointment</a>
+                    <a class="dropdown-item" href="managebooking.php">Manage Appointments</a>                           
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Services</a>
+                <a class="nav-link" href="services.php">Services</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="locateus.php">Locate Us</a>
             </li> 
-            <li class="nav-item">
+            <!--<li class="nav-item">
                 <a class="nav-link text-light font-weight-bold" href="#">Login</a>
-            </li> 
+            </li> --> 
         </ul>
     </div> 
 </nav>

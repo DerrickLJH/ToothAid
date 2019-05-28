@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>ToothAid</title>
+        <title>Tooth Aid</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
@@ -27,24 +27,24 @@ and open the template in the editor.
             firebase.initializeApp(firebaseConfig);
             database = firebase.database();
 
-            var ref = database.ref('data/services');
+            var ref = database.ref('data/appointment');
             ref.on('value', gotData, errData);
 
             function gotData(data) {
-                var services = data.val();
-                var keys = Object.keys(services);
+                var appointments = data.val();
+                var keys = Object.keys(appointments);
                 console.log(keys);
-                var message = "";
                 for (var i = 0; i < keys.length; i++) {
                     var k = keys[i];
-                    var name = services[k].name;
-                    var desc = services[k].desc;
-                    console.log(name, desc);
-                    message += "<h2 class='bg-info text-light font-weight-bold'>" + name + "</h2><div class='text-light align-content-center' id='content'>" +
-                            desc + "</div>";
+                    var name = appointments[k].name;
+                    var email = appointments[k].email;
+                    var mobile = appointments[k].mobile;
+                    var datetime = appointments[k].datetime;
+                    var service = appointments[k].service;
+                    var prefclinic = appointments[k].clinic;
+                    //console.log(name, email,mobile,datetime, service, prefclinic);
+
                 }
-                $("#accordion").html(message);
-                $("#accordion").accordion();
             }
 
             function errData(err) {
@@ -54,28 +54,30 @@ and open the template in the editor.
         </script>
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
-        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
-        <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/moment.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <style>
-            #content {
-                background-color: #1B1B1B;
-            }
-        </style>
     </head>
     <body>
-        <?php include("panel.php"); ?>
+        <?php include("panel.php") ?>
         <div class="card headerCards">
-            <div class="card-body">
-                <h4>Provided Services</h4>
+            <div class="card-body">               
+                <h4>Manage Appointments</h4>
             </div>
-            <img src="img/teethhd.jpg" alt="Service Pic" style="width: 100%; height: 200px;"/>
-        </div>
-        <div id="accordion">
-        </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="cardLoc card" style="width:400px">
+                        <img class="loc card-img-top" id="clinicImg" src="img/yewtee.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h4 class="card-title" id="clinicName">Yew Tee Square Dental Clinic</h4>
+                            <a href="directions.php" class="btn btn-primary">Directions <i class="fas fa-directions"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </body>
 </html>
