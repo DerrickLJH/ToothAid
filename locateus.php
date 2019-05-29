@@ -14,6 +14,7 @@ and open the template in the editor.
         <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
         <script>
+            
             var firebaseConfig = {
                 apiKey: "AIzaSyB6e0LFKNwLXDeMiZPbl6bdpf8ab5BMNMQ",
                 authDomain: "toothaid-1558875904634.firebaseapp.com",
@@ -39,10 +40,10 @@ and open the template in the editor.
                     var k = keys[i];
                     var name = clinics[k].name;
                     var img = clinics[k].img;
-                    console.log(name,img);
-                    message += "<div class='cardLoc card'><img class='loc card-img-top' id='clinicImg' src='img/" + img +"' alt='" + name 
-                            +"'><div class='card-body'><h4 class='card-title' id='clinicName'>" + name 
-                            + "</h4><a href='directions.php' class='btn btn-primary'>Directions <i class='fas fa-directions'></i></a></div></div>";
+                    console.log(name, img);
+                    message += "<div class='cardLoc card'><img class='loc card-img-top' id='clinicImg' src='img/" + img + "' alt='" + name
+                            + "'><div class='card-body'><h4 class='card-title' id='clinicName'>" + name
+                            + "</h4><a href='directions.php?id="+ k +"' class='btn btn-primary' id='btndirect'>Directions <i class='fas fa-directions'></i></a></div></div>";
                 }
                 $("#content").html(message);
             }
@@ -51,11 +52,12 @@ and open the template in the editor.
                 console.log('Error!');
                 console.log(err);
             }
+
         </script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
@@ -70,8 +72,6 @@ and open the template in the editor.
         </div>
         <div class="container-fluid">
             <div class="row" id="content">
-                
-
             </div>
         </div>
     </body>

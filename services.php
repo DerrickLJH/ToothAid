@@ -73,9 +73,9 @@ and open the template in the editor.
             <div class="card-body">
                 <h4>Provided Services</h4>
             </div>
-            <img src="img/teethhd.jpg" alt="Service Pic" style="width: 100%; height: 200px;"/>
+            <img src="img/teethhd.jpg" alt="Service Pic" style="width: 100%;"/>
         </div>
-        <div id="accordion">
+        <div id="accordion" style="margin-top: 20px; margin-bottom: 20px;">
         </div>
     </body>
 </html>

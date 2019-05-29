@@ -1,4 +1,8 @@
-
+<?php
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+}
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -19,8 +23,7 @@
                 appId: "1:289974946400:web:65ecb9d90373f3f3"
             };
             // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-        </script>
+            firebase.initializeApp(firebaseConfig);</script>
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -33,24 +36,11 @@
     </head>
     <body>
         <?php include("panel.php"); ?>
+        <p id="index" style="display: none"><?php echo $id ?></p>
         <div class="card cardSchedule headerCards">
-            <div class="card-header"><h4>Schedule an Appointment</h4></div>
+            <div class="card-header"><h4>Edit this Appointment</h4></div>
             <div class="card-body">
-                <form id="form" method="post" action="index.php" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="idName">Name: </label>
-                        <input type="text" name="name" id="idName" class="form-control"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="idEmail">Email: </label>
-                        <input type="text" name="email" id="idEmail" class="form-control" placeholder="e.g. abc123@zxc.com"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="idPostal">Mobile:</label>
-                        <input type="text" name="mobile"
-                               placeholder="e.g. 91234567" id="idMobile" class="form-control"/>
-                    </div>
+                <form id="form" method="post" action="managebooking.php" class="form-horizontal">
                     <div class="form-group">
                         <label for="datetimepicker">Date & Time:</label>
                         <input type="text" class="form-control" name="date_time" id="datetimepicker1">
@@ -61,51 +51,59 @@
                             <option value="" selected>Please select...</option>
                             <option value="Braces">Braces</option>
                             <option value="Dentures">Dentures</option>
-                            <option value="GDT">General Dental Treatment</option>
-                            <option value="Gum">Gum Disease</option>
+                            <option value="General Dental Treatment">General Dental Treatment</option>
+                            <option value="Gum Disease">Gum Disease</option>
                             <option value="Implant">Implant</option>
-                            <option value="Nerve">Nerve Treatment</option>
-                            <option value="WisTooth">Wisdom Tooth</option>
+                            <option value="Nerve Treatment">Nerve Treatment</option>
+                            <option value="Wisdom Tooth">Wisdom Tooth</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="selClinic">Preferred Clinic:</label>
                         <select id="selClinic" name="clinic" class="form-control">
                             <option value="" selected>Please select...</option>
-                            <option value="yewtee">Yew Tee Square Dental Clinic</option>
-                            <option value="clementi">Clementi Dental Clinic</option>
-                            <option value="amk">Ang Mo Kio Dental Clinic</option>
-                            <option value="beachrd">Beach Road Dental Clinic</option>
+                            <option value="Yew Tee Square Dental Clinic">Yew Tee Square Dental Clinic</option>
+                            <option value="Clementi Dental Clinic">Clementi Dental Clinic</option>
+                            <option value="Ang Mo Kio Dental Clinic">Ang Mo Kio Dental Clinic</option>
+                            <option value="Beach Road Dental Clinic">Beach Road Dental Clinic</option>
                         </select>
                     </div>
-
-                    <input class="btn btn-block btn-primary" id="submit" type="submit" value="Submit"/>
+                    <input class="btn btn-block btn-primary" id="submit" type="submit" value="Update"/>
+                    <input class="btn btn-block btn-secondary" id="cancel" type="submit" value="Cancel"/>
+                    <input class="btn btn-block btn-danger" id="delete" type="submit" value="Delete"/>
                 </form>
             </div>
         </div>
         <script>
             var database = firebase.database();
+            var uid = $("#index").text();
+            console.log(uid);
+            var ref = database.ref('data/appointment/' + uid);
+            ref.on('value', function(snapshot){
+               var value = snapshot.val();
+               console.log(value);
+               $("#datetimepicker1").val(value.datetime);
+               $("#selService").val(value.service);
+               $("#selClinic").val(value.clinic);
+            });
+
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+            
             $("#submit").on("click", function () {
-                var name = $("#idName").val();
-                var email = $("#idEmail").val();
-                var mobile = $("#idMobile").val();
                 var datetime = $("#datetimepicker1").val();
                 var selectedService = $("#selService :selected").text();
                 var selectedClinic = $("#selClinic :selected").text();
                 var data = {
-                    name: name,
-                    email: email,
-                    mobile: mobile,
                     datetime: datetime,
                     service: selectedService,
                     clinic: selectedClinic
                 };
-                database.ref('data/appointment').push(data);
+                database.ref('data/appointment/' + uid).set(data);
             });
-
-
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
+            $("#delete").on("click", function() {
+               database.ref('data/appointment/' + uid).remove(); 
             });
         </script>
     </body>

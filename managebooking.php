@@ -26,25 +26,24 @@ and open the template in the editor.
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
             database = firebase.database();
-
             var ref = database.ref('data/appointment');
             ref.on('value', gotData, errData);
-
+            var index = 0;
             function gotData(data) {
                 var appointments = data.val();
                 var keys = Object.keys(appointments);
                 console.log(keys);
+                var message = "";
                 for (var i = 0; i < keys.length; i++) {
                     var k = keys[i];
-                    var name = appointments[k].name;
-                    var email = appointments[k].email;
-                    var mobile = appointments[k].mobile;
                     var datetime = appointments[k].datetime;
                     var service = appointments[k].service;
                     var prefclinic = appointments[k].clinic;
                     //console.log(name, email,mobile,datetime, service, prefclinic);
-
+                    message += "<div class='cardLoc card' style='width:400px'><div class='card-body'><span style='float: right;'><a href='editBooking.php?id=" + k +"' class='btn btn-light text-light'><i class='fas fa-edit'></i> Edit</a></span><h4>"
+                            + prefclinic + "</h4><p>" + service + "<br>" + datetime + "</p></div></div><br/>";
                 }
+                $("#content").html(message);
             }
 
             function errData(err) {
@@ -61,6 +60,11 @@ and open the template in the editor.
         <script src="js/bootstrap.min.js"></script>
         <script src="js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <style>
+            .btn {
+                background-color: #1B1B1B;
+            }
+        </style>
     </head>
     <body>
         <?php include("panel.php") ?>
@@ -68,16 +72,10 @@ and open the template in the editor.
             <div class="card-body">               
                 <h4>Manage Appointments</h4>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="cardLoc card" style="width:400px">
-                        <img class="loc card-img-top" id="clinicImg" src="img/yewtee.jpg" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title" id="clinicName">Yew Tee Square Dental Clinic</h4>
-                            <a href="directions.php" class="btn btn-primary">Directions <i class="fas fa-directions"></i></a>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row" id="content">
             </div>
+        </div>
     </body>
 </html>
